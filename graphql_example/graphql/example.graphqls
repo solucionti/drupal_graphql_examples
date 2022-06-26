@@ -1,0 +1,49 @@
+schema {
+  query: Query
+}
+
+type Query {
+  article(id: Int!): Article
+  articles(
+    offset: Int = 0
+    limit: Int = 10
+  ): ArticleConnection!
+}
+
+type Article {
+  id: Int!
+  title: String!
+  body: String!
+  imagen: String
+  imageData: String
+  author: String
+  ciudad:[TagTerm]
+  ciudadParents:[String]
+  imagenMedia: [MediaImage]
+}
+
+type TagTerm {
+  id: Int
+  name: String
+  body: String
+  created: Int
+  parent: [ParentTerm]
+}
+
+type MediaImage{
+  id: Int
+}
+
+type ParentTerm {
+  id: Int
+  name: String
+  body: String
+  created: Int
+  parent: [TagTerm]
+}
+
+
+type ArticleConnection {
+  total: Int!
+  items: [Article!]
+}
